@@ -22,8 +22,10 @@ function startGame(){
         var frontFace = card.querySelector(".front");
         frontFace.style.background = `url('${images[i].src}')`
     }
-    document.querySelector("#gameOverModal").style.zIndex = -2;
-    document.querySelector("#gameOverModal").removeEventListener("click", startGame(), false);
+
+    var modal = document.querySelector("#gameOverModal");
+    modal.style.zIndex = -2;
+    modal.removeEventListener("click", startGame, false);
 }
 function flipCard(){
     if(flippedCards.length < 2 ){
@@ -48,11 +50,16 @@ function flipCard(){
         flippedCards = [];
     }
 }
+window.setTimeout(function(){
+    gameOver()
+}, 5000);
+
 function gameOver(){
     var modal = document.querySelector("#gameOverModal");
     modal.style.zIndex = 10;
-    modal.addEventListener("click", startGame(), false);
+    modal.addEventListener("click", startGame, false);
 }
+
 function randomShuffle(array){
     var newArray = [];
     while(newArray.length !== array.length){
